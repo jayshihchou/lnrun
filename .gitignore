@@ -1,0 +1,7 @@
+nrun/config.json
+__pycache__*
+GAS/.clasp.json
+GAS/appsscript.json
+lnrun.egg-info
+dist/
+
