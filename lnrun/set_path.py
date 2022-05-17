@@ -1,4 +1,5 @@
 import argparse
+
 from lnrun.config import save_script_path
 
 

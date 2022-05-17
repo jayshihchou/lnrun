@@ -2,7 +2,6 @@ import runpy
 
 from setuptools import setup
 
-
 __version__ = runpy.run_path('lnrun/__init__.py')['__version__']
 
 setup(

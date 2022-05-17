@@ -37,3 +37,7 @@ def save_script_path(script_path: str) -> None:
     config = load_config()
     config['script_path'] = script_path
     write_config(config)
+
+
+def is_script_path_setted() -> bool:
+    return 'script_path' in load_config()

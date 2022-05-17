@@ -1,19 +1,19 @@
 import sys
 
-from lnrun import get_path, run, set_path, send_message
-from lnrun import __version__
+from lnrun import __version__, get_path, run, send_message, set_path
 
 
 def print_help():
     print(
-        'Notify after run'
+        f'lnrun({__version__}): Line Notify after running shell commands.'
         '\nUsage: lnrun [COMMAND] [OPTIONS]'
+        '\nor     lnrun [SYSTEM COMMAND]'
         '\n\nCommands:'
-        '\n     run                notify after run commands'
-        '\n     send_message        send test message'
-        '\n     get_path            get GAS web path'
-        '\n     set_path            set GAS web path'
-        '\n     -v, --version       show version'
+        '\n     run [SYSTEM COMMAND]     notify after run commands'
+        '\n     send_message             send test message'
+        '\n     get_path                 get GAS web path'
+        '\n     set_path                 set GAS web path'
+        '\n     -v, --version            show version'
         '\n adding command to see more help info'
     )
 
@@ -42,12 +42,11 @@ def main():
         if cmd in cmds:
             all_not_in_cmd = False
             break
-    if all_not_in_cmd:
-        print('Cannot find method in ', sys.argv)
-        print_help()
-        exit()
 
-    cmds[sys.argv[1]].main(True)
+    if all_not_in_cmd:
+        cmds['run'].main()
+    else:
+        cmds[sys.argv[1]].main(True)
 
 
 if __name__ == '__main__':

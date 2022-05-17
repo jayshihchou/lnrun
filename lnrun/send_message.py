@@ -1,6 +1,7 @@
 import argparse
 import os
 import urllib.parse
+
 from lnrun.config import get_script_path
 
 
