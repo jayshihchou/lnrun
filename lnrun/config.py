@@ -41,3 +41,16 @@ def save_script_path(script_path: str) -> None:
 
 def is_script_path_setted() -> bool:
     return 'script_path' in load_config()
+
+
+trues = ['1', 'true', 'yes', 'on']
+
+
+def get_config(key: str) -> bool:
+    config = load_config()
+    if key in config:
+        send_errors: str = config[key]
+        if len(send_errors) > 0:
+            send_errors = send_errors.lower()
+            return send_errors in trues
+    return False

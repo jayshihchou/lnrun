@@ -1,6 +1,6 @@
 import sys
 
-from lnrun import __version__, get_path, run, send_message, set_path
+from lnrun import __version__, get_configs, run, send_message, set_config
 
 
 def print_help():
@@ -11,8 +11,8 @@ def print_help():
         '\n\nCommands:'
         '\n     run [SYSTEM COMMAND]     notify after run commands'
         '\n     send_message             send test message'
-        '\n     get_path                 get GAS web path'
-        '\n     set_path                 set GAS web path'
+        '\n     get_configs              print all configs'
+        '\n     set_config               set config with key and value'
         '\n     -v, --version            show version'
         '\n adding command to see more help info'
     )
@@ -22,8 +22,8 @@ def main():
     cmds = {
         'run': run,
         'send_message': send_message,
-        'get_path': get_path,
-        'set_path': set_path,
+        'get_configs': get_configs,
+        'set_config': set_config,
     }
     if len(sys.argv) == 1:
         print('Need to provide method to use.')

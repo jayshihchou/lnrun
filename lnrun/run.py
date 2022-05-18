@@ -4,7 +4,7 @@ import tempfile
 import sys
 
 from lnrun.send_message import send_message
-from lnrun.config import is_script_path_setted
+from lnrun.config import get_config, is_script_path_setted
 
 
 def main(_: bool = False):
@@ -16,25 +16,34 @@ def main(_: bool = False):
     if cmds[0] == 'run':
         cmds = cmds[1:]
 
-    file = tempfile.NamedTemporaryFile()
-    popen = subprocess.Popen(cmds, stderr=file)
-    return_code = popen.wait()
-    if return_code:
-        file.seek(0)
-        lines = file.readlines()
-        lines = [line.decode() for line in lines]
-        lines = ''.join(lines)
+    send_errors = get_config('send_errors')
 
-    file.close()
+    if send_errors:
+        file = tempfile.NamedTemporaryFile()
+        process = subprocess.run(cmds, stderr=file)
+    else:
+        process = subprocess.run(cmds, stdout=subprocess.STDOUT, stderr=subprocess.STDOUT)
+    return_code = process.returncode
+    # popen = subprocess.Popen(cmds, stderr=file)
+    # return_code = popen.wait()
 
     message = f'lnrun done running : {cmds}'
-    if return_code:
-        message += f'\nwith error:\n{lines}'
-        print(lines)
+    if send_errors:
+        if return_code:
+            file.seek(0)
+            lines = file.readlines()
+            try:
+                lines = [line.decode(errors='replace') for line in lines]
+                lines = ''.join(lines)
+            except Exception:
+                pass
+            file.close()
+            message += f'\nwith error:\n{lines}'
+        else:
+            message += ' without errors'
     else:
-        message += ' without errors'
-        print('cmd run without errors')
-
+        message += ' with error.' if return_code else ' without error.'
+    print(message)
     send_message(message)
 
 
