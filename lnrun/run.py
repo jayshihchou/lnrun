@@ -22,7 +22,7 @@ def main(_: bool = False):
         file = tempfile.NamedTemporaryFile()
         process = subprocess.run(cmds, stderr=file)
     else:
-        process = subprocess.run(cmds, stdout=subprocess.STDOUT, stderr=subprocess.STDOUT)
+        process = subprocess.run(cmds)
     return_code = process.returncode
     # popen = subprocess.Popen(cmds, stderr=file)
     # return_code = popen.wait()
