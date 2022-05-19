@@ -9,7 +9,7 @@ from lnrun.config import get_config, is_script_path_setted
 
 def main(_: bool = False):
     if not is_script_path_setted():
-        print('script path is not setted, run "lnrun set_path https://your.path.here" to set your path')
+        print('script path is not setted, run "lnrun set_config script_path https://your.path.here" to set your path')
         exit()
 
     cmds = sys.argv[1:]

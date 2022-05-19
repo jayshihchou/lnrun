@@ -16,7 +16,7 @@ def parse_args(additional: bool = False) -> argparse.Namespace:
 def send_message(message: str) -> None:
     script_path = get_script_path()
     if script_path is None:
-        print('script path is not setted, run "lnrun set_path https://your.path.here" to set your path')
+        print('script path is not setted, run "lnrun set_config script_path https://your.path.here" to set your path')
         exit()
 
     urltext = urllib.parse.quote(message)
