@@ -42,7 +42,7 @@ def main(_: bool = False):
         else:
             message += ' without errors'
     else:
-        message += ' with error.' if return_code else ' without error.'
+        message += ' with error' if return_code else ' without error'
     print(message)
     send_message(message)
 
