@@ -26,7 +26,7 @@ def send_message(message: str) -> None:
     if verbose:
         os.system(f'curl {script_path}?status={urltext}')
     else:
-        subprocess.call(f'curl {script_path}?status={urltext}', stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        subprocess.call(['curl', f'{script_path}?status={urltext}'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 
 def main(additional: bool = False) -> None:
