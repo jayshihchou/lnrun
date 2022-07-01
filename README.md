@@ -4,6 +4,17 @@ Line Notify after runing a shell commands.
 
 ## Goal
 Receive notify after running a command.
+```mermaid
+graph LR
+
+A(Your Phone)
+B(LineNotify)
+C(GAS)
+D(lnrun)
+D --> C
+C --> B
+B --> A
+```
 
 ## Requirement
 1.	A Google Account
