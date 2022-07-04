@@ -1,6 +1,7 @@
 import sys
 
-from lnrun import __version__, get_configs, run, send_message, set_config
+from lnrun import __version__
+from lnrun import run_main, send_message_main, get_configs_main, set_config_main
 
 
 def print_help():
@@ -20,10 +21,10 @@ def print_help():
 
 def main():
     cmds = {
-        'run': run,
-        'send_message': send_message,
-        'get_configs': get_configs,
-        'set_config': set_config,
+        'run': run_main,
+        'send_message': send_message_main,
+        'get_configs': get_configs_main,
+        'set_config': set_config_main,
     }
     if len(sys.argv) == 1:
         print('Need to provide method to use.')
@@ -44,9 +45,9 @@ def main():
             break
 
     if all_not_in_cmd:
-        cmds['run'].main()
+        cmds['run']()
     else:
-        cmds[sys.argv[1]].main(True)
+        cmds[sys.argv[1]](True)
 
 
 if __name__ == '__main__':
