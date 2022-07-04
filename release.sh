@@ -1,6 +1,5 @@
 #!/bin/sh
 
-rm -R ./build
 sudo rm -Rf ./dist
 
 sudo docker rmi jayshihchou/lnrun -f
