@@ -1,9 +1,8 @@
 import argparse
-import os
-import subprocess
 import urllib.parse
+from urllib.request import Request, urlopen
 
-from lnrun.config import get_script_path, get_config
+from lnrun.config import get_config, get_token
 
 
 def parse_args(additional: bool = False) -> argparse.Namespace:
@@ -15,18 +14,32 @@ def parse_args(additional: bool = False) -> argparse.Namespace:
 
 
 def send_message(message: str) -> None:
-    script_path = get_script_path()
-    if script_path is None:
-        print('script path is not setted, run "lnrun set_config script_path https://your.path.here" to set your path')
+    token = get_token()
+    if token is None:
+        print('line_token is not setted, run "lnrun set_config line_token your_token" to set your token')
         exit()
 
-    urltext = urllib.parse.quote(message)
+    urldata = urllib.parse.urlencode({
+        'message': message,
+    }).encode()
 
-    verbose = get_config('verbose')
-    if verbose:
-        os.system(f'curl {script_path}?status={urltext}')
-    else:
-        subprocess.call(['curl', f'{script_path}?status={urltext}'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    req = Request(
+        url='https://notify-api.line.me/api/notify',
+        headers={
+            'Authorization': 'Bearer ' + token,
+        },
+        data=urldata,
+    )
+
+    try:
+        content = urlopen(req)
+    except Exception as e:
+        print('Run urllib.request.urlopen with Exception:')
+        print(e)
+        exit()
+
+    if get_config('verbose'):
+        print(content.read())
 
 
 def main(additional: bool = False) -> None:

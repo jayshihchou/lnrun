@@ -29,27 +29,24 @@ def load_config() -> dict:
 
 def write_config(data: dict) -> None:
     config_path = get_config_dir()
+
+    if not os.path.exists(os.path.dirname(config_path)):
+        os.makedirs(os.path.dirname(config_path))
+
     json_object = json.dumps(data, indent=4)
     with open(config_path, 'w') as outfile:
         outfile.write(json_object)
 
 
-def get_script_path() -> Union[str, None]:
+def get_token() -> Union[str, None]:
     config = load_config()
-    if 'script_path' in config:
-        return config['script_path']
-
+    if 'line_token' in config:
+        return config['line_token']
     return None
 
 
-def save_script_path(script_path: str) -> None:
-    config = load_config()
-    config['script_path'] = script_path
-    write_config(config)
-
-
-def is_script_path_setted() -> bool:
-    return 'script_path' in load_config()
+def is_token_setted() -> bool:
+    return 'line_token' in load_config()
 
 
 trues = ['1', 'true', 'yes', 'on']

@@ -4,11 +4,11 @@ import tempfile
 import sys
 
 from lnrun.send_message import send_message
-from lnrun.config import get_config, is_script_path_setted
+from lnrun.config import get_config, is_token_setted
 
 
 def main(_: bool = False):
-    if not is_script_path_setted():
+    if not is_token_setted():
         print('script path is not setted, run "lnrun set_config script_path https://your.path.here" to set your path')
         exit()
 
