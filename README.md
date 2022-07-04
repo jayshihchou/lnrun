@@ -9,36 +9,26 @@ graph LR
 
 A(Your Phone)
 B(LineNotify)
-C(GAS)
-D(lnrun)
-D --> C
+C(lnrun)
 C --> B
 B --> A
 ```
 
 ## Requirement
-1.	A Google Account
-2.	A Line Account
-3. Python 3.6+
+1.	A Line Account
+2. Python 3.6+
 
 ## How To Setup
 1. Go to [Line Notify ](https://notify-bot.line.me/), and login to your account.
 2. Click right top and select My page.
 3. Generate access token (you can create a new group for notify bot) and copy that token for Step 6.
-4. Go to Google App Script (GAS) and create new project.
-5. Copy everything in lnrun/GAS/code.js into your code.gs.
-6. Replace 'your code here' with token from Step 3.
-7. Next, go to "Deploy" on right top, and select "New deployment". Then on next page click gear, and select Web App.
- ![alt text](https://github.com/jayshihchou/lnrun/blob/main/doc/step7.jpg?raw=true)
-8. In "Who has access" selcet "Anyone". (you may want to edit this page too) And click "Deploy".
-9. After it finish processing, you will get your url for this web app. And copy that url.
-10. Install lnrun using pip.
+4. Install lnrun using pip.
 ```
 pip install lnrun
 ```
-11. Paste url to lnrun configs. (Note: configs will only save in your local machine.)
+5. Paste url to lnrun configs. (Note: configs will only save in your local machine.)
 ```
-lnrun set_config script_path https://url.here
+lnrun set_config line_token https://url.here
 ```
 Now your good to go.
 
