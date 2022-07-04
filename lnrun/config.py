@@ -4,8 +4,17 @@ import os
 from typing import Union
 
 
+DEFAULT_CACHE_DIR = '~/.cache'
+
+
+def get_config_dir() -> str:
+    return os.path.join(
+        os.path.expanduser(os.path.join(DEFAULT_CACHE_DIR, 'lnrun')), 'config.json'
+    )
+
+
 def load_config() -> dict:
-    config_path = os.path.join(os.path.dirname(__file__), 'config.json')
+    config_path = get_config_dir()
     data = None
     if os.path.exists(config_path):
         try:
@@ -19,7 +28,7 @@ def load_config() -> dict:
 
 
 def write_config(data: dict) -> None:
-    config_path = os.path.join(os.path.dirname(__file__), 'config.json')
+    config_path = get_config_dir()
     json_object = json.dumps(data, indent=4)
     with open(config_path, 'w') as outfile:
         outfile.write(json_object)
