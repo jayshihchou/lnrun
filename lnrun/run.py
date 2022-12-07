@@ -1,10 +1,11 @@
+import os
 import subprocess
-
-import tempfile
 import sys
+import tempfile
 
+from lnrun.config import get_config, get_config_value, is_token_setted
 from lnrun.send_message import send_message
-from lnrun.config import get_config, is_token_setted
+from lnrun.send_image import send_image
 
 
 def main(_: bool = False):
@@ -44,7 +45,17 @@ def main(_: bool = False):
     else:
         message += ' with error' if return_code else ' without error'
     print(message)
-    send_message(message)
+    image_path = get_config_value('image_path')
+    message_sent = False
+    if image_path is not None:
+        if os.path.exists(image_path):
+            if send_image(image_path, message):
+                message_sent = True
+        else:
+            print(f'try send image but is not existed: {image_path}')
+
+    if not message_sent:
+        send_message(message)
 
 
 if __name__ == '__main__':

@@ -1,7 +1,7 @@
 import sys
 
 from lnrun import __version__
-from lnrun import _run_main_cli, _send_message_cli, _get_configs_cli, _set_config_cli
+from lnrun import _run_main_cli, _send_message_cli, _send_image_cli, _get_configs_cli, _set_config_cli
 
 
 def print_help():
@@ -12,6 +12,7 @@ def print_help():
         '\n\nCommands:'
         '\n     run [SYSTEM COMMAND]     notify after run commands'
         '\n     send_message             send test message'
+        '\n     send_image               send test image'
         '\n     get_configs              print all configs'
         '\n     set_config               set config with key and value'
         '\n     -v, --version            show version'
@@ -23,6 +24,7 @@ def main():
     cmds = {
         'run': _run_main_cli,
         'send_message': _send_message_cli,
+        'send_image': _send_image_cli,
         'get_configs': _get_configs_cli,
         'set_config': _set_config_cli,
     }

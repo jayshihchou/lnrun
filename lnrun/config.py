@@ -55,8 +55,15 @@ trues = ['1', 'true', 'yes', 'on']
 def get_config(key: str) -> bool:
     config = load_config()
     if key in config:
-        send_errors: str = config[key]
-        if len(send_errors) > 0:
-            send_errors = send_errors.lower()
-            return send_errors in trues
+        value: str = config[key]
+        if len(value) > 0:
+            value = value.lower()
+            return value in trues
     return False
+
+
+def get_config_value(key: str) -> str:
+    config = load_config()
+    if key in config:
+        return config[key]
+    return None

@@ -3,9 +3,10 @@ import argparse
 from lnrun.config import load_config, write_config
 
 keys = {
-    'line_token': 'line token from Line Notify',
+    'line_token': 'Line token from Line Notify',
     'send_errors': 'Capture errors will record stderr so no stderr output in terminal. (note: tqdm use stderr to print prograss bar)',
-    'verbose': 'show log from lnrun',
+    'verbose': 'Show log from lnrun',
+    'image_path': 'Also send image after run',
 }
 
 
