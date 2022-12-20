@@ -10,7 +10,7 @@ from lnrun.send_image import send_image
 
 def main(_: bool = False):
     if not is_token_setted():
-        print('script path is not setted, run "lnrun set_config script_path https://your.path.here" to set your path')
+        print('line_token is not setted, run "lnrun set_config line_token your_token" to set your token')
         exit()
 
     cmds = sys.argv[1:]
