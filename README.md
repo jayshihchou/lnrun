@@ -1,3 +1,5 @@
+#### Line Notify Service is Off, so this project is not working anymore
+
 # lnrun
 
 Line Notify after runing a shell commands.
